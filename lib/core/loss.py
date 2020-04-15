@@ -28,23 +28,7 @@ class CrossEntropy2D(nn.Module):
 
         assert(b == tb)
 
-        # Handle inconsistent size between input and target
-
         if resize_scores:
-# <<<<<<< HEAD
-#             if h != th or w != tw:  # downsample labels
-#                 output = nn.functional.upsample(output, size=(th, tw), mode="bilinear", align_corners=False)
-#                 #output = nn.functional.interpolate(output, size=(th, tw), mode="bilinear", align_corners=False)
-#         elif config.MODEL.USE_DUPSAMPLING:
-#             pad_size = (h - th)/2.
-#             bottom, right =  math.floor(pad_size), math.ceil(pad_size)
-#             m = nn.ZeroPad2d((bottom, right, bottom, right))
-#             target = m(target)
-#         else:
-#             assert (h == th and w == tw)
-#         pdb.set_trace()
-#         loss = nn.functional.cross_entropy(output, target, weight=weight, ignore_index=self.ignore_index, reduce=True if self.reduction == 'mean' else False)
-# =======
             if h != th or w != tw:  # upsample logits
                 output = nn.functional.interpolate(output, size=(th, tw), mode="bilinear", align_corners=False)
         elif config.MODEL.USE_DUPSAMPLING:
@@ -60,6 +44,5 @@ class CrossEntropy2D(nn.Module):
         loss = nn.functional.cross_entropy(
             output, target, weight=self.weight, ignore_index=self.ignore_index, reduction=self.reduction
         )
-# >>>>>>> Add dataloader for PASCAL-CONTEXT, CityScapes.
 
         return loss
