@@ -12,7 +12,7 @@ DATASET:
   DATASET: pascal_voc
   SUBSET: False
   ROOT: 'data/pascal_voc'
-  SBD_PATH: '/home/sfwang/Datasets/benchmark_RELEASE'
+  SBD_PATH: 'data/sbd'
   TEST_SET: val
   TRAIN_SET: train_aug
 MODEL:

@@ -56,13 +56,13 @@ See [`requirements.txt`](requirements.txt) for other dependencies.
 
 ### Training on VOC2012
 1. Download ImageNet-pretrained ResNet-50 [model](https://download.pytorch.org/models/resnet50-19c8e357.pth) and put it under `${ROOT}/models/pytorch/imagenet/`
-2. To train baseline DeepLabV3 model (block5, w/o ASPP), run:
+2. To train baseline DeepLabV3 model (with ASPP), run:
 ```
-CUDA_VISIBLE_DEVICES=$GPU_IDS python image_segmentation/train_voc.py --cfg experiments/pascal_voc/resnet50-block5_513x513_sgd-poly-lr7e-3_2gpus.yaml
+CUDA_VISIBLE_DEVICES=$GPU_IDS python image_segmentation/train_voc.py --cfg experiments/pascal_voc/resnet50-aspp_513x513_head-lr-1x_sgd-poly-lr7e-3_2gpus.yaml
 ```
 To train DeepLabV3 with dual-decomposition end-to-end, run:
 ```
-CUDA_VISIBLE_DEVICES=$GPU_IDS python image_segmentation/train_voc.py --cfg experiments/pascal_voc/resnet50-block5_513x513_ne-fpi-iter5_no-pw-loss_gamma-learn_head-lr-1x_sgd-poly_lr7e-3_2gpus.yaml 
+CUDA_VISIBLE_DEVICES=$GPU_IDS python image_segmentation/train_voc.py --cfg experiments/pascal_voc/resnet50-aspp_513x513_ne-fpi-iter5_head-lr-1x_sgd-poly_lr7e-3_2gpus.yaml
 ```
 Two GPUs each with >=11GB memory are required for training either of the models.
 Model checkpoints and logs will be saved into `output` folder while tensorboard logs will be saved into `log` folder.
@@ -74,7 +74,7 @@ CUDA_VISIBLE_DEVICES=$GPU_ID python image_segmentation/validate_voc.py --cfg ${P
 ```
 Where ${PATH_TO_CONFIG_FILE} is the same file used in training. Tensorboard logs will be saved into `log` folder.
 
-### Citation
+## Citation
 If you use our code or models in your research, please cite with:
 ```
 @article{wang2019DDD,
@@ -88,5 +88,5 @@ If you use our code or models in your research, please cite with:
 ```
 
 ## References
-The overall structure of the code follows [Simple Baselines for Human Pose Estimation and Tracking](https://github.com/microsoft/human-pose-estimation.pytorch).
-Xception back-bone definition and weights are from [Pretrained models for Pytorch](https://github.com/Cadene/pretrained-models.pytorch).
+- The overall structure of the code follows [Simple Baselines for Human Pose Estimation and Tracking](https://github.com/microsoft/human-pose-estimation.pytorch).
+- Xception back-bone definition and weights are from [Pretrained models for Pytorch](https://github.com/Cadene/pretrained-models.pytorch).
