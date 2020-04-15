@@ -1,0 +1,62 @@
+GPUS: '0,1'
+DATA_DIR: ''
+OUTPUT_DIR: 'output'
+LOG_DIR: 'log'
+WORKERS: 4
+PRINT_FREQ: 100
+CUDNN:
+  BENCHMARK: False
+  DETERMINISTIC: True
+  ENABLED: True
+DATASET:
+  DATASET: pascal_voc
+  SUBSET: False
+  ROOT: 'data/pascal_voc'
+  SBD_PATH: '/home/sfwang/Datasets/benchmark_RELEASE'
+  TEST_SET: val
+  TRAIN_SET: train_aug
+MODEL:
+  NAME: seg_aspp_resnet
+  PRETRAINED: 'models/pytorch/imagenet/resnet50-19c8e357.pth'
+  IMAGE_SIZE:
+  - 513 
+  - 513 
+  LEARN_PAIRWISE_TERMS: True
+  FPI_ITERS: 5
+  LEARN_GAMMA: False
+  EXTRA:
+    NUM_LAYERS: 50
+    NUM_DECONV_LAYERS: 0
+    NUM_CLASSES: 21
+LOSS:
+  USE_TARGET_WEIGHT: False
+  USE_PAIRWISE_LOSS: False
+  PAIRWISE_LOSS_WEIGHT: 0.1
+TRAIN:
+  BATCH_SIZE: 8
+  SHUFFLE: true
+  BEGIN_EPOCH: 0
+  END_EPOCH: 50
+  RESUME: false
+  OPTIMIZER: sgd
+  LR_SCHEDULER: 'poly'
+  LR: 0.007
+  MOMENTUM: 0.9
+  WD: 0.0001
+  GAMMA1: 0.99
+  GAMMA2: 0.0
+  NESTEROV: false
+  TRAIN_BN: true
+  HEAD_LR: '1x'
+  NE_GAMMA_U: 2.0 
+  NE_GAMMA_L: 2.0 
+TEST:
+  BATCH_SIZE: 1
+  FLIP_TEST: false
+  MODEL_FILE: ''
+DEBUG:
+  DEBUG: false
+  SAVE_BATCH_IMAGES_GT: true
+  SAVE_BATCH_IMAGES_PRED: true
+  SAVE_HEATMAPS_GT: true
+  SAVE_HEATMAPS_PRED: true
