@@ -89,4 +89,5 @@ If you use our code or models in your research, please cite with:
 
 ## References
 - The overall structure of the code follows [Simple Baselines for Human Pose Estimation and Tracking](https://github.com/microsoft/human-pose-estimation.pytorch).
-- Xception back-bone definition and weights are from [Pretrained models for Pytorch](https://github.com/Cadene/pretrained-models.pytorch).
+- Xception back-bone definition and weights: [Pretrained models for Pytorch](https://github.com/Cadene/pretrained-models.pytorch).
+- Synchronized BatchNorm: [In-Place Activated BatchNorm](https://github.com/mapillary/inplace_abn).
